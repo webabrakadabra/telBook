@@ -14,7 +14,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
  * Created by sergik on 03.09.2015.
  */
 public class Window implements ActionListener, ItemListener{
-     JFrame frame;
+     JFrame frame, frameMessage;
      private JButton find, clear, add, change, del, searchAll;
      private JTextField telNumber, organ, telKod, viddil, abonent, vuzol, stanNumber, uasNumber, tzmkNumber, gatewayNumber,
              mzNumber, pib, id;
@@ -25,11 +25,8 @@ public class Window implements ActionListener, ItemListener{
              checkBoxGorod;
      private static final int MAX_LEN_NUMBER = 10;
      private static final int MAX_LEN_LETTER = 27;
-    // private int resultFindTelNum;
-     //private String resultFindOrg;
 
     public Window(){
-
         frame = new JFrame("База телефонних номерів");
         frame.setSize(935, 325);
         frame.setResizable(false);
@@ -412,7 +409,6 @@ public class Window implements ActionListener, ItemListener{
         del.addActionListener(this);
         searchAll.addActionListener(this);
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
