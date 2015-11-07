@@ -11,6 +11,8 @@ public class Functions {
             resultFindStan, resultFindUas, resultFindTzmk, resultFindGateway, resultFindMZ, resultFindPib,
             getTelNumber, getOrgan, getViddil, getAbonent, getVuzol, getStan, getUas, getTzmk, getGateway, getMZ,
             getPib, getID, getKodNumber, sql;
+    String setTelNumber, setOrgan, setViddil, setAbonent, setVuzol, setStanNumber, setUasNumber, setTzmkNumber,
+            setGatewayNumber, setMzNumber, setPib, getId;
     ResultSet rs;
 
     public void searchOrg(String sql){
@@ -362,33 +364,42 @@ public class Functions {
         Main.window.id.setText(null);
     }
     public void pushFields(){
-//        try{
-//            ConnectDB connectDB = new ConnectDB();
-            //String setTelNumber = "11111";
-           Main.window.telNumber.setText("1111111111");
-//            String getOrgan = Main.window.organ.getText();
-//            String getAbonent = Main.window.abonent.getText();
-//            String getViddil = Main.window.viddil.getText();
-//            String getVuzol = Main.window.vuzol.getText();
-//            String getstanNumber = Main.window.stanNumber.getText();
-//            String getUasNumber = Main.window.uasNumber.getText();
-//            String gettzmkNumber = Main.window.tzmkNumber.getText();
-//            String getGatewayNumber = Main.window.gatewayNumber.getText();
-//            String getMzNumber = Main.window.mzNumber.getText();
-//            String getPib = Main.window.pib.getText();
-          String getId = Main.window.id.getText();
+        connectDB = new ConnectDB();
+        try{
+            getId = Main.window.id.getText();
+            sql = "SELECT TEL_NUMBER, ORG_NAME, VIDDIL, ABONENT, VUZOL, STAN_NUMBER, UAS_NUMBER, TZMK," +
+                    " GATEWAY_NUMBER, MZ_NUMBER, PIB FROM PHONE WHERE ID LIKE '"+getId+"'" ;
+            rs = connectDB.statement.executeQuery(sql);
+          while (rs.next()){
+              setTelNumber = rs.getString("TEL_NUMBER");
+              setOrgan = rs.getString("ORG_NAME");
+              setViddil = rs.getString("VIDDIL");
+              setAbonent = rs.getString("ABONENT");
+              setVuzol = rs.getString("VUZOL");
+              setStanNumber = rs.getString("STAN_NUMBER");
+              setUasNumber = rs.getString("UAS_NUMBER");
+              setTzmkNumber = rs.getString("TZMK");
+              setGatewayNumber = rs.getString("GATEWAY_NUMBER");
+              setMzNumber = rs.getString("MZ_NUMBER");
+              setPib = rs.getString("PIB");
 
-
-            //String sql = "SELECT TEL_NUMBER='"+setTelNumber+"' FROM PHONE WHERE ID = '"+getId+"'" ;
-
-          //  rs = connectDB.statement.executeQuery(sql);
-//            JOptionPane.showMessageDialog(null, "Значення добавлено");
-//            connectDB.statement.close();
-//            connectDB.connection.close();
-//
-//        }catch (SQLException e){
-//            JOptionPane.showMessageDialog(null, "Такого ID не існує!");
-//        }
+              Main.window.telNumber.setText(setTelNumber);
+              Main.window.organ.setText(setOrgan);
+              Main.window.viddil.setText(setViddil);
+              Main.window.abonent.setText(setAbonent);
+              Main.window.vuzol.setText(setVuzol);
+              Main.window.stanNumber.setText(setStanNumber);
+              Main.window.uasNumber.setText(setUasNumber);
+              Main.window.tzmkNumber.setText(setTzmkNumber);
+              Main.window.gatewayNumber.setText(setGatewayNumber);
+              Main.window.mzNumber.setText(setMzNumber);
+              Main.window.pib.setText(setPib);
+          }
+            connectDB.statement.close();
+            connectDB.connection.close();
+       }catch (SQLException e){
+           JOptionPane.showMessageDialog(null, "Помилка функції pushFields()!");
+       }
    }
 }
 
