@@ -14,9 +14,9 @@ import java.sql.SQLIntegrityConstraintViolationException;
  * Created by sergik on 03.09.2015.
  */
 public class Window implements ActionListener, ItemListener{
-     JFrame frame, frameMessage;
+     JFrame frame;
      private JButton find, clear, add, change, del, searchAll;
-     private JTextField telNumber, organ, telKod, viddil, abonent, vuzol, stanNumber, uasNumber, tzmkNumber, gatewayNumber,
+     public JTextField telNumber, organ, telKod, viddil, abonent, vuzol, stanNumber, uasNumber, tzmkNumber, gatewayNumber,
              mzNumber, pib, id;
      private JLabel telNum, org, kod, viddilLabel, abon, vuz, stNumber, uasNum, tzmkNum, gatewayNum, mzNum, pibLabel, idLabel;
      private JTable table;
@@ -469,35 +469,36 @@ public class Window implements ActionListener, ItemListener{
             id.setText(null);
 /*----------------Добавление значений в БД-------------------*/
         }else if(e.getSource() == add){
-            try {
-                String getTelNumber = telNumber.getText();
-                String getOrgan = organ.getText();
-                String getAbonent = abonent.getText();
-                String getViddil = viddil.getText();
-                String getVuzol = vuzol.getText();
-                String getstanNumber = stanNumber.getText();
-                String getUasNumber = uasNumber.getText();
-                String gettzmkNumber = tzmkNumber.getText();
-                String getGatewayNumber = gatewayNumber.getText();
-                String getMzNumber = mzNumber.getText();
-                String getPib = pib.getText();
-
-                if(getVuzol.length() == 0) {
-                    JOptionPane.showMessageDialog(null, "Заповніть поле \"Вузол\"");
-                    return;
-                }
-                String sql = "INSERT INTO PHONE(TEL_NUMBER, ORG_NAME, VIDDIL, ABONENT, VUZOL, STAN_NUMBER, UAS_NUMBER, TZMK," +
-                        " GATEWAY_NUMBER, MZ_NUMBER, PIB) " + "VALUES ('"+getTelNumber+"', '"+getOrgan+"', '"+getViddil+"', " +
-                        " '"+getAbonent+"', '"+getVuzol+"', '"+getstanNumber+"', '"+getUasNumber+"', '"+gettzmkNumber+"'," +
-                        " '"+getGatewayNumber+"', '"+getMzNumber+"', '"+getPib+"')";
-
-                connectDB.statement.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "Значення добавлено");
-                connectDB.statement.close();
-                connectDB.connection.close();
-            }catch (SQLException a){
-                JOptionPane.showMessageDialog(null, "Помилка добавлення значення! SQLException");
-            }
+            FrameMessage frameMessage = new FrameMessage("Добавлення запису", "Ви дійсно хочете добавити цей запис?");
+//            try {
+//                String getTelNumber = telNumber.getText();
+//                String getOrgan = organ.getText();
+//                String getAbonent = abonent.getText();
+//                String getViddil = viddil.getText();
+//                String getVuzol = vuzol.getText();
+//                String getstanNumber = stanNumber.getText();
+//                String getUasNumber = uasNumber.getText();
+//                String gettzmkNumber = tzmkNumber.getText();
+//                String getGatewayNumber = gatewayNumber.getText();
+//                String getMzNumber = mzNumber.getText();
+//                String getPib = pib.getText();
+//
+//                if(getVuzol.length() == 0) {
+//                    JOptionPane.showMessageDialog(null, "Заповніть поле \"Вузол\"");
+//                    return;
+//                }
+//                String sql = "INSERT INTO PHONE(TEL_NUMBER, ORG_NAME, VIDDIL, ABONENT, VUZOL, STAN_NUMBER, UAS_NUMBER, TZMK," +
+//                        " GATEWAY_NUMBER, MZ_NUMBER, PIB) " + "VALUES ('"+getTelNumber+"', '"+getOrgan+"', '"+getViddil+"', " +
+//                        " '"+getAbonent+"', '"+getVuzol+"', '"+getstanNumber+"', '"+getUasNumber+"', '"+gettzmkNumber+"'," +
+//                        " '"+getGatewayNumber+"', '"+getMzNumber+"', '"+getPib+"')";
+//
+//                connectDB.statement.executeUpdate(sql);
+//                JOptionPane.showMessageDialog(null, "Значення добавлено");
+//                connectDB.statement.close();
+//                connectDB.connection.close();
+//            }catch (SQLException a){
+//                JOptionPane.showMessageDialog(null, "Помилка добавлення значення! SQLException");
+//            }
 
         }else if (e.getSource() == change){
             func.change(telNumber, organ, viddil, abonent, vuzol, stanNumber, uasNumber, tzmkNumber, gatewayNumber,

@@ -1,16 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Ser on 05.11.2015.
  */
-public class FrameMessage {
+public class FrameMessage implements ActionListener {
     private JFrame frameMessage;
     private JPanel panelMessage, panelButton;
     private JLabel textMessage;
     private JButton buttonOK, buttonCancel;
-
-
 
     FrameMessage(String name, String Message){
         frameMessage = new JFrame(name);
@@ -34,10 +34,25 @@ public class FrameMessage {
         buttonCancel = new JButton("Скасувати");
         panelButton.add(buttonCancel);
         frameMessage.setVisible(true);
+
+        buttonOK.addActionListener(this);
+        buttonCancel.addActionListener(this);
     }
 
     public static void main(String[] args){
         FrameMessage frame = new FrameMessage("Окно", "wwewewew");
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Functions functions = new Functions();
+        if(e.getSource() == buttonOK){
+         this.frameMessage.setVisible(false);
+            functions.addRecord();
+
+        }else if(e.getSource() == buttonCancel){
+            this.frameMessage.setVisible(false);
+
+        }
+    }
 }

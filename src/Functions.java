@@ -314,5 +314,38 @@ public class Functions {
         }
 
     }
+    public void addRecord(){
+        ConnectDB connectDB = new ConnectDB();
+                    try {
+                String getTelNumber = Main.window.telNumber.getText();
+                String getOrgan = Main.window.organ.getText();
+                String getAbonent = Main.window.abonent.getText();
+                String getViddil = Main.window.viddil.getText();
+                String getVuzol = Main.window.vuzol.getText();
+                String getstanNumber = Main.window.stanNumber.getText();
+                String getUasNumber = Main.window.uasNumber.getText();
+                String gettzmkNumber = Main.window.tzmkNumber.getText();
+                String getGatewayNumber = Main.window.gatewayNumber.getText();
+                String getMzNumber = Main.window.mzNumber.getText();
+                String getPib = Main.window.pib.getText();
+
+                if(getVuzol.length() == 0) {
+                    JOptionPane.showMessageDialog(null, "Заповніть поле \"Вузол\"");
+                    return;
+                }
+                String sql = "INSERT INTO PHONE(TEL_NUMBER, ORG_NAME, VIDDIL, ABONENT, VUZOL, STAN_NUMBER, UAS_NUMBER, TZMK," +
+                        " GATEWAY_NUMBER, MZ_NUMBER, PIB) " + "VALUES ('"+getTelNumber+"', '"+getOrgan+"', '"+getViddil+"', " +
+                        " '"+getAbonent+"', '"+getVuzol+"', '"+getstanNumber+"', '"+getUasNumber+"', '"+gettzmkNumber+"'," +
+                        " '"+getGatewayNumber+"', '"+getMzNumber+"', '"+getPib+"')";
+
+                connectDB.statement.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null, "Значення добавлено");
+                connectDB.statement.close();
+                connectDB.connection.close();
+            }catch (SQLException a){
+                JOptionPane.showMessageDialog(null, "Помилка добавлення значення! SQLException");
+            }
+
+    }
 }
 
