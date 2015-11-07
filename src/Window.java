@@ -25,6 +25,8 @@ public class Window implements ActionListener, ItemListener{
              checkBoxGorod;
      private static final int MAX_LEN_NUMBER = 10;
      private static final int MAX_LEN_LETTER = 27;
+    int clickCounter = 0;
+
 
     public Window(){
         frame = new JFrame("База телефонних номерів");
@@ -455,55 +457,24 @@ public class Window implements ActionListener, ItemListener{
             frameTable.setVisible(true);
 /*---------------- Очистка полей ввода -------------------*/
         }else if(e.getSource() == clear){
-            telNumber.setText(null);
-            organ.setText(null);
-            viddil.setText(null);
-            abonent.setText(null);
-            vuzol.setText(null);
-            stanNumber.setText(null);
-            uasNumber.setText(null);
-            tzmkNumber.setText(null);
-            gatewayNumber.setText(null);
-            mzNumber.setText(null);
-            pib.setText(null);
-            id.setText(null);
+            FrameMessage frameMessage = new FrameMessage("Очистка полів введення", "Ви дійсно хочете очистити всі поля?", "clear");
+
 /*----------------Добавление значений в БД-------------------*/
         }else if(e.getSource() == add){
-            FrameMessage frameMessage = new FrameMessage("Добавлення запису", "Ви дійсно хочете добавити цей запис?");
-//            try {
-//                String getTelNumber = telNumber.getText();
-//                String getOrgan = organ.getText();
-//                String getAbonent = abonent.getText();
-//                String getViddil = viddil.getText();
-//                String getVuzol = vuzol.getText();
-//                String getstanNumber = stanNumber.getText();
-//                String getUasNumber = uasNumber.getText();
-//                String gettzmkNumber = tzmkNumber.getText();
-//                String getGatewayNumber = gatewayNumber.getText();
-//                String getMzNumber = mzNumber.getText();
-//                String getPib = pib.getText();
-//
-//                if(getVuzol.length() == 0) {
-//                    JOptionPane.showMessageDialog(null, "Заповніть поле \"Вузол\"");
-//                    return;
-//                }
-//                String sql = "INSERT INTO PHONE(TEL_NUMBER, ORG_NAME, VIDDIL, ABONENT, VUZOL, STAN_NUMBER, UAS_NUMBER, TZMK," +
-//                        " GATEWAY_NUMBER, MZ_NUMBER, PIB) " + "VALUES ('"+getTelNumber+"', '"+getOrgan+"', '"+getViddil+"', " +
-//                        " '"+getAbonent+"', '"+getVuzol+"', '"+getstanNumber+"', '"+getUasNumber+"', '"+gettzmkNumber+"'," +
-//                        " '"+getGatewayNumber+"', '"+getMzNumber+"', '"+getPib+"')";
-//
-//                connectDB.statement.executeUpdate(sql);
-//                JOptionPane.showMessageDialog(null, "Значення добавлено");
-//                connectDB.statement.close();
-//                connectDB.connection.close();
-//            }catch (SQLException a){
-//                JOptionPane.showMessageDialog(null, "Помилка добавлення значення! SQLException");
-//            }
+            FrameMessage frameMessage = new FrameMessage("Добавлення запису", "Ви дійсно хочете добавити цей запис?", "add");
 
         }else if (e.getSource() == change){
-            func.change(telNumber, organ, viddil, abonent, vuzol, stanNumber, uasNumber, tzmkNumber, gatewayNumber,
-                    mzNumber, pib, id);
-            System.out.print("111");
+            if(!id.getText().isEmpty()){
+                clickCounter++;
+                func.pushFields();
+            }if(clickCounter == 2){
+                FrameMessage frameMessage = new FrameMessage("Зміна запису", "Ви дійсно хочете змінити цей запис?", "change");
+                clickCounter = 0;
+            }if(id.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Помилка редактування! Для редактування необхідно ввести ID");
+                clickCounter = 0;
+            }
+
         }
         else if(e.getSource() == del) {
             try {

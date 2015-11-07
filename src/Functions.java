@@ -347,5 +347,48 @@ public class Functions {
             }
 
     }
+    public void clearFields(){
+        Main.window.telNumber.setText(null);
+        Main.window.organ.setText(null);
+        Main.window.viddil.setText(null);
+        Main.window.abonent.setText(null);
+        Main.window.vuzol.setText(null);
+        Main.window.stanNumber.setText(null);
+        Main.window.uasNumber.setText(null);
+        Main.window.tzmkNumber.setText(null);
+        Main.window.gatewayNumber.setText(null);
+        Main.window.mzNumber.setText(null);
+        Main.window.pib.setText(null);
+        Main.window.id.setText(null);
+    }
+    public void pushFields(){
+//        try{
+//            ConnectDB connectDB = new ConnectDB();
+            //String setTelNumber = "11111";
+           Main.window.telNumber.setText("1111111111");
+//            String getOrgan = Main.window.organ.getText();
+//            String getAbonent = Main.window.abonent.getText();
+//            String getViddil = Main.window.viddil.getText();
+//            String getVuzol = Main.window.vuzol.getText();
+//            String getstanNumber = Main.window.stanNumber.getText();
+//            String getUasNumber = Main.window.uasNumber.getText();
+//            String gettzmkNumber = Main.window.tzmkNumber.getText();
+//            String getGatewayNumber = Main.window.gatewayNumber.getText();
+//            String getMzNumber = Main.window.mzNumber.getText();
+//            String getPib = Main.window.pib.getText();
+          String getId = Main.window.id.getText();
+
+
+            //String sql = "SELECT TEL_NUMBER='"+setTelNumber+"' FROM PHONE WHERE ID = '"+getId+"'" ;
+
+          //  rs = connectDB.statement.executeQuery(sql);
+//            JOptionPane.showMessageDialog(null, "Значення добавлено");
+//            connectDB.statement.close();
+//            connectDB.connection.close();
+//
+//        }catch (SQLException e){
+//            JOptionPane.showMessageDialog(null, "Такого ID не існує!");
+//        }
+   }
 }
 

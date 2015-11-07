@@ -3,19 +3,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by Ser on 05.11.2015.
- */
 public class FrameMessage implements ActionListener {
     private JFrame frameMessage;
     private JPanel panelMessage, panelButton;
     private JLabel textMessage;
     private JButton buttonOK, buttonCancel;
+    String buttonClick;
 
-    FrameMessage(String name, String Message){
+    FrameMessage(String name, String Message, String buttonClick){
+        this.buttonClick = buttonClick;
         frameMessage = new JFrame(name);
         frameMessage.setSize(250, 170);
-        frameMessage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameMessage.setResizable(false);
         frameMessage.setLayout(null);
         frameMessage.setLocationRelativeTo(null);
@@ -39,17 +37,20 @@ public class FrameMessage implements ActionListener {
         buttonCancel.addActionListener(this);
     }
 
-    public static void main(String[] args){
-        FrameMessage frame = new FrameMessage("Окно", "wwewewew");
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         Functions functions = new Functions();
         if(e.getSource() == buttonOK){
          this.frameMessage.setVisible(false);
-            functions.addRecord();
-
+            if(buttonClick == "add"){
+                functions.addRecord();
+            }else if(buttonClick == "clear"){
+                functions.clearFields();
+            }else if(buttonClick == "change"){
+                functions.change(Main.window.telNumber, Main.window.organ, Main.window.viddil, Main.window.abonent,
+                        Main.window.vuzol, Main.window.stanNumber, Main.window.uasNumber, Main.window.tzmkNumber,
+                        Main.window.gatewayNumber, Main.window.mzNumber, Main.window.pib, Main.window.id);
+            }
         }else if(e.getSource() == buttonCancel){
             this.frameMessage.setVisible(false);
 
