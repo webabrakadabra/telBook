@@ -26,7 +26,8 @@ public class Window implements ActionListener, ItemListener{
      private static final int MAX_LEN_NUMBER = 10;
      private static final int MAX_LEN_LETTER = 27;
     int clickCounter = 0;
-
+    String [] mas = new String[3];
+    int key = 0;
 
     public Window(){
         frame = new JFrame("База телефонних номерів");
@@ -465,11 +466,25 @@ public class Window implements ActionListener, ItemListener{
 
         }else if (e.getSource() == change){
             if(!id.getText().isEmpty()){
-                clickCounter++;
-                func.pushFields();
+
+                mas[key] = id.getText();
+                if (mas[0].equals(id.getText())){
+                    clickCounter++;
+                    if(clickCounter < 2) {
+                        key++;
+                        func.pushFields();
+                    }
+                }else {
+                    mas[0] = id.getText();
+                    mas[1] = null;
+                    func.pushFields();
+                }
             }if(clickCounter == 2){
                 FrameMessage frameMessage = new FrameMessage("Зміна запису", "Ви дійсно хочете змінити цей запис?", "change");
                 clickCounter = 0;
+                key = 0;
+                mas[0] = null;
+                mas[1] = null;
             }if(id.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Помилка редактування! Для редактування необхідно ввести ID");
                 clickCounter = 0;
